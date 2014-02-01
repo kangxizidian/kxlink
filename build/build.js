@@ -11935,8 +11935,13 @@ var kangxi = React.createClass({displayName: 'kangxi',
     if (this.props.len) this.state.sellength=this.props.len;
   },
   render: function() {
+    if (!this.state.page) {
+      this.state.page=this.props.page;
+      this.state.selstart=this.props.start;
+      this.state.sellength=this.props.len;
+      //this.state.scrollto=true;
+    }
     var pagename=this.state.page?this.state.page.getName():" ";
-
     return (
       React.DOM.div(null, 
         " 開放康熙字典",React.DOM.span( {className:"pagename label label-success"}, pagename),React.DOM.span(null, this.state.selstart,":",this.state.sellength),      
@@ -11980,7 +11985,18 @@ var j13 = React.createClass({displayName: 'j13',
     }
     if (this.props.len) this.state.sellength=this.props.len;
   },
+  shouldComponentUpdate:function(nextProps,nextState) {
+    return nextProps.page!=this.props.page
+   || nextProps.start!=this.props.start
+   || nextProps.scrollto;
+  },
   render: function() {
+    if (!this.state.page) {
+      this.state.page=this.props.page;
+      this.state.selstart=this.props.start;
+      this.state.sellength=this.props.len;
+      this.state.scrollto=true;
+    }
     var pagename=this.state.page?this.state.page.getName():" ";
     return (
       React.DOM.div(null, "十三經 " ,
@@ -12146,7 +12162,7 @@ var surface = React.createClass({displayName: 'surface',
   scrollToSelection:function() {
     var node = this.getDOMNode();
     var scrollto=$(this.refs.caretdiv.getDOMNode()).offset().top;
-    node.scrollTop=scrollto-100;
+    node.scrollTop=scrollto-200;
       
     //  $(this.refs.surface.getDOMNode()).scrollTop(scrollto);
   },
@@ -12218,7 +12234,7 @@ module.exports=kangxibuttons;
 require.register("kxlink-j13buttons/index.js", function(exports, require, module){
 /** @jsx React.DOM */
 
-//var othercomponent=Require("other");  
+//var othercomponent=Require("other");   
 var j13buttons = React.createClass({displayName: 'j13buttons',
   getInitialState: function() {
     return {pagename: this.props.pagename};
@@ -28362,7 +28378,7 @@ module.exports=[{"name":"乾",
 "俞彌．帥師伐滑．王使伯服．游孫伯．如鄭請滑．鄭伯怨惠王之入．而不與厲公爵也．又怨襄王之與衞滑也．故不聽"+
 "王命．而執二子．王怒．將以狄伐鄭．富辰諫曰．不可．臣聞之．大上以德撫民．其次親親．以相及也．昔周公弔二叔之"+
 "不咸．故封建親戚．以蕃屏周．管．蔡．郕．霍．魯．衞．毛．聃．郜．雍．曹．滕．畢．原．酆．郇．文之昭也．邗．晉．應．韓．武之穆也．凡．蔣．邢．茅．"+
-"胙．祭．周公之𦙍也．召穆公思周德之不類．故糾合宗族于成周．而作詩．曰．常棣之華．鄂不𩋾𩋾．凡今之人．莫如兄"+
+"胙．祭．周公之胤也．召穆公思周德之不類．故糾合宗族于成周．而作詩．曰．常棣之華．鄂不𩋾𩋾．凡今之人．莫如兄"+
 "弟．其四章曰．兄弟鬩于牆．外禦其侮．而是則兄弟雖有小忿．不廢懿親．今天子不忍小忿．以棄鄭親．其若之何．庸"+
 "勳親親．暱．近尊賢．德之大者也．即聾．從昧．與頑．用嚚．姦之大者也．弃德崇姦．禍之大者也．鄭有平惠之勳．又有厲"+
 "宣之親．弃嬖寵而用三良．於諸姬為近．四德具矣．耳不聽五聲之和為聾．目不別五色之章為昧．心不則德義之"+
@@ -28403,6 +28419,12 @@ module.exports=[
 {name:"應",start:159,len:9, payload:{type:"link",name:"僖24",start:180,len:13}},
 
 ]
+
+/*
+嚮用五福。威用六極
+205 link to the end
+六極
+*/
 });
 
 

@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-//var othercomponent=Require("other");  
+//var othercomponent=Require("other");   
 var j13buttons = React.createClass({
   getInitialState: function() {
     return {pagename: this.props.pagename};

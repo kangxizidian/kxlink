@@ -27,8 +27,13 @@ var kangxi = React.createClass({
     if (this.props.len) this.state.sellength=this.props.len;
   },
   render: function() {
+    if (!this.state.page) {
+      this.state.page=this.props.page;
+      this.state.selstart=this.props.start;
+      this.state.sellength=this.props.len;
+      //this.state.scrollto=true;
+    }
     var pagename=this.state.page?this.state.page.getName():" ";
-
     return (
       <div>
         開放康熙字典<span className="pagename label label-success">{pagename}</span><span>{this.state.selstart}:{this.state.sellength}</span>      
