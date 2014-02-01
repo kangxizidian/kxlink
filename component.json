@@ -1,0 +1,43 @@
+{
+  "name": "kxlink",
+  "repo": "https://github.com/kangxizidian/kxlink.git",
+  "description": "hello world",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "ksanaforge/boot": "*",
+    "brighthas/bootstrap": "*",
+    "component/jquery": "*",
+    "kxlink/main": "*",
+    "kxlink/kangxi": "*",
+    "kxlink/j13": "*",
+    "kxlink/backlinklist": "*",
+    "ksanadoc/surface": "*",
+    "kxlink/help": "*",
+    "kxlink/kangxibuttons": "*",
+    "kxlink/j13buttons": "*",
+    "kxlink/links": "*",
+    "yaml":"*"
+  },
+  "development": {},
+  "paths": [
+    "components",
+    "../components",
+    "../ksanadoc/components",
+    "../node_modules/"
+  ],
+  "local": [
+    "facebook/react"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js",
+    "kangxipages.js",
+    "j13pages.js",
+    "markups.js"
+  ],
+  "styles": [
+    "index.css"
+  ]
+}
