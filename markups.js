@@ -5,7 +5,7 @@ module.exports=[
 
 {name:"遏",start:71,len:7, payload:{type:"link",name:"大有",start:61,len:7}},
 {name:"遏",start:86,len:4, payload:{type:"link",name:"武成",start:323,len:4}},
-{name:"應",start:212,len:4, payload:{type:"link",name:"武成",start:323,len:4}},
+{name:"應",start:212,len:4, payload:{type:"link",name:"武成",start:202,len:4}},
 {name:"應",start:159,len:9, payload:{type:"link",name:"僖24",start:180,len:13}},
 
 ]

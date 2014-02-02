@@ -6,47 +6,38 @@ var kangxibuttons=Require("kangxibuttons");
 var surface=Require("surface");
 var kangxi = React.createClass({
   getInitialState: function() {
-    return { page:this.props.page,selstart:0,sellength:0,scrollto:false }
+   // return { page:this.props.page,selstart:0,sellength:0,scrollto:false }
   },
   onSelection:function(start,len) {
-    this.setState({selstart:start,sellength:len})
+    this.props.onKxSelection(start,len)
   }, 
   onLink:function(payload) {
-    this.props.openJ13(payload.name,payload.start,payload.len);
+    this.props.openJ13(payload.name,payload.start,payload.len,true);
   },
   onShowPage:function(name) {
-    var page=this.props.doc.findPage(name);
-    this.setState({page:page});
+    this.props.openKangxi(name,0,0);
   },
-  componentWillUpdate:function() {
-    if (this.props.page)  this.state.page=this.props.page;
-    if (this.props.start) {
-      this.state.selstart=this.props.start;
-      this.state.scrollto=true;
-    } 
-    if (this.props.len) this.state.sellength=this.props.len;
+  shouldComponentUpdate:function(nextProps) {
+    return (nextProps.page!=this.props.page
+      || nextProps.start!=this.props.start
+      || nextProps.len!=this.props.len)
   },
   render: function() {
-    if (!this.state.page) {
-      this.state.page=this.props.page;
-      this.state.selstart=this.props.start;
-      this.state.sellength=this.props.len;
-      //this.state.scrollto=true;
-    }
-    var pagename=this.state.page?this.state.page.getName():" ";
+    var pagename=this.props.page?this.props.page.getName():" ";
     return (
       <div>
-        開放康熙字典<span className="pagename label label-success">{pagename}</span><span>{this.state.selstart}:{this.state.sellength}</span>      
+        開放康熙字典<span className="pagename label label-success">{pagename}</span>
+        <span>{this.props.start}:{this.props.len}</span>      
         <kangxibuttons onShowPage={this.onShowPage}/>
         
        <surface 
-            selstart={this.state.selstart} 
-            sellength={this.state.sellength}
+            selstart={this.props.start} 
+            sellength={this.props.len}
             onLink={this.onLink}
             onSelection={this.onSelection} 
             className="surface" 
-            page={this.props.page||this.state.page}
-            scrollto={this.state.scrollto}/>
+            page={this.props.page||this.props.page}
+            scrollto={this.props.scrollto}/>
       </div>
     );
   }
