@@ -19,6 +19,10 @@ var backlinklist = React.createClass({
       , parseInt(e.target.getAttribute('data-start'),10)
       , parseInt(e.target.getAttribute('data-len'),10));
   },
+  gochar:function(e) {
+    var thechar=e.target.innerHTML;
+    this.props.openKangxi(thechar);
+  },
   render: function() {
     var disable=this.props.linkable?"":"disabled";
     return (
@@ -27,6 +31,7 @@ var backlinklist = React.createClass({
          onClick={this.props.addLink}>
        <img  src="link.png"/>
       </a>
+      <a onClick={this.gochar} className={"btn btn-primary"}>{this.props.linkchar}</a>
       <div align="center" onClick={this.openpage}>
         {this.links()} 
       </div>

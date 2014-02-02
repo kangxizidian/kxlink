@@ -28,6 +28,7 @@ var main = React.createClass({
           links={this.state.backlink} 
           linkable={this.linkable()}
           addLink={this.addLink} 
+          linkchar={this.linkchar()}
           openKangxi={this.openKangxi} />
         </div>
         <div ref="j13div" className="j13 col-md-5">
@@ -46,6 +47,10 @@ var main = React.createClass({
   linkable:function() {
     return (this.state.j13len>0 && this.state.j13start>0
             &&this.state.kxlen>0 && this.state.kxstart>0)
+  },
+  linkchar:function() {
+    if (this.state.j13len!=1) return;
+    return this.state.j13page.getInscription().substr(this.state.j13start,1)
   },
   addLink:function() {
     markups.push({
@@ -108,6 +113,7 @@ var main = React.createClass({
   },
   componentDidMount:function() {
     this.openKangxi("福",0,0)
+    //this.openKangxi("昭",0,0)
     this.openJ13("謙",0,0)
   }
 
