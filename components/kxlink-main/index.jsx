@@ -9,7 +9,7 @@ var j13pages=Require("kxlink/j13pages");
 var markups=Require("kxlink/markups"); 
 var main = React.createClass({
   getInitialState: function() {
-    return { };
+    return { kxstart:0,kxlen:0,j13start:0,j13len:0};
   }, 
   render: function() {
     return (
@@ -24,7 +24,12 @@ var main = React.createClass({
           len={this.state.kxlen}
           scrollto={this.state.kxscrollto} />
         </div>
-        <div className="col-md-1"><backlinklist links={this.state.backlink} openKangxi={this.openKangxi} /></div>
+        <div className="col-md-1"><backlinklist 
+          links={this.state.backlink} 
+          linkable={this.linkable()}
+          addLink={this.addLink} 
+          openKangxi={this.openKangxi} />
+        </div>
         <div ref="j13div" className="j13 col-md-5">
           <j13 
             openJ13={this.openJ13} 
@@ -38,6 +43,23 @@ var main = React.createClass({
       </div>
     );
   },
+  linkable:function() {
+    return (this.state.j13len>0 && this.state.j13start>0
+            &&this.state.kxlen>0 && this.state.kxstart>0)
+  },
+  addLink:function() {
+    markups.push({
+      name:this.state.kxpage.getName(),
+      start:this.state.kxstart,
+      len:this.state.kxlen,
+      payload:{type:"link",name:this.state.j13page.getName(),
+        start:this.state.j13start,
+        len:this.state.j13len,
+      }
+    })
+    this.loadmarkup();
+    this.setState({kxlen:0});
+  },
   onKxSelection:function(start,len){
     this.setState({kxstart:start,kxlen:len,kxscrollto:false})
   },
@@ -48,7 +70,9 @@ var main = React.createClass({
     for (var i in markups) {
       var m=markups[i];
       var page=this.state.kangxi.findPage(m.name);
-      page.addMarkup(m.start,m.len,m.payload);
+      if (page.markupAt(m.start).length==0) {
+        page.addMarkup(m.start,m.len,m.payload,false);
+      }
     }
   },
   findBacklink:function(name) {
@@ -81,6 +105,11 @@ var main = React.createClass({
   componentWillMount:function() {
     this.loaddoc();
     this.loadmarkup();
+  },
+  componentDidMount:function() {
+    this.openKangxi("福",0,0)
+    this.openJ13("謙",0,0)
   }
+
 });
 module.exports=main;

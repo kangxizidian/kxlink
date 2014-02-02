@@ -13,16 +13,23 @@ var backlinklist = React.createClass({
       data-len={L.len}>{L.name}</a>
     })
   },
-  dolink:function(e) {
+  openpage:function(e) {
     var pagename=e.target.innerHTML;
     this.props.openKangxi(pagename
       , parseInt(e.target.getAttribute('data-start'),10)
       , parseInt(e.target.getAttribute('data-len'),10));
   },
   render: function() {
+    var disable=this.props.linkable?"":"disabled";
     return (
-      <div onClick={this.dolink}>
+      <div>
+      <a className={"btn btn-primary "+disable} 
+         onClick={this.props.addLink}>
+       <img  src="link.png"/>
+      </a>
+      <div align="center" onClick={this.openpage}>
         {this.links()} 
+      </div>
       </div>
     );
   }
