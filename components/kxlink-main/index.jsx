@@ -14,7 +14,7 @@ var main = React.createClass({
   render: function() {
     return (
       <div className="main row">
-        <div ref="kangxidiv" className="kangxi col-md-6">
+        <div ref="kangxidiv" className="kangxi col-sm-6">
         <kangxi 
           openJ13={this.openJ13} 
           openKangxi={this.openKangxi} 
@@ -24,14 +24,14 @@ var main = React.createClass({
           len={this.state.kxlen}
           scrollto={this.state.kxscrollto} />
         </div>
-        <div className="col-md-1"><backlinklist 
+        <div className="col-sm-1"><backlinklist 
           links={this.state.backlink} 
           linkable={this.linkable()}
           addLink={this.addLink} 
           linkchar={this.linkchar()}
           openKangxi={this.openKangxi} />
         </div>
-        <div ref="j13div" className="j13 col-md-5">
+        <div ref="j13div" className="j13 col-sm-5">
           <j13 
             openJ13={this.openJ13} 
             openKangxi={this.openKangxi} 
